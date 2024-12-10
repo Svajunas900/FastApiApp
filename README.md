@@ -1,8 +1,8 @@
 ## Guide for start this app <br/>
 
-Step 1. Run this command in cmd: docker build . -t appname <br/>
+Step 1. Run this command in cmd: > docker build . -t appname <br/>
 
-Step 2. Run: docker run -p 3000:3000 appname <br/>
+Step 2. Run: > docker run -p 3000:3000 appname <br/>
 
 ## Guide for using this app <br/>
 
