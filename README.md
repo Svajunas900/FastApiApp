@@ -1,4 +1,4 @@
-## Guide for start this app <br/>
+## Guide for starting this app <br/>
 
 Step 1. Run this command in cmd:  **docker build . -t appname** <br/>
 
