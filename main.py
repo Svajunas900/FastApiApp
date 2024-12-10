@@ -1,4 +1,3 @@
-from typing import Union
 import yfinance as yf
 import json
 from fastapi import FastAPI
@@ -14,10 +13,7 @@ def get_stock_info(stock_name, period, type):
 
 
 def create_list_from_numpy(numpy_object):
-    list_a = []
-    for n in numpy_object:
-        list_a.append(float(n))
-    return list_a
+    return [float(n) for n in numpy_object]
 
 
 # Todays Price
