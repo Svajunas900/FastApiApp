@@ -4,11 +4,6 @@ import json
 from fastapi import FastAPI
 
 app = FastAPI()
-# Period must be ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max']
-# dat = yf.Ticker("msft")
-# print(dat.info)
-# data = dat.history(period='5d')
-# print(data)
 
 
 def get_stock_info(stock_name, period, type):
