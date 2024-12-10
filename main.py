@@ -35,7 +35,7 @@ def read_root(stock_name, period):
     return json.dumps({"Stock Prices" : prices_list})
 
 
-@app.get("/volume/{stock_name}/{period}")
+@app.get("/volumes/{stock_name}/{period}")
 def volumes_and_averages(stock_name, period):
     numpy_volumes = get_stock_info(stock_name, period, "Volume")
     volumes_list = create_list_from_numpy(numpy_volumes)
