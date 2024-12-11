@@ -1,9 +1,9 @@
 ## HOW TO SECTION:
 
-1. Installing Application
-   Navigate to directory where you want to clone application
-   Clone repository using url https://github.com/Svajunas900/FastApiApp.git
-   **git clone https://github.com/Svajunas900/FastApiApp.git**
+1. Installing Application <br/>
+   Navigate to directory where you want to clone application <br/>
+   Clone repository using url https://github.com/Svajunas900/FastApiApp.git <br/>
+   **git clone https://github.com/Svajunas900/FastApiApp.git** <br/>
 
  
  ## Guide for starting this app locally
