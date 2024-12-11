@@ -20,7 +20,7 @@ fastapi dev main.py
 
 Step 1. Run this command in cmd:
 ````
-docker build . -t appname** 
+docker build . -t appname
 ````
 Step 2. Run:
 ````
