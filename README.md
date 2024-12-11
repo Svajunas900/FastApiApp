@@ -1,9 +1,31 @@
-## Guide for starting this app <br/>
+## HOW TO SECTION:
 
-Step 1. Run this command in cmd:  **docker build . -t appname** <br/>
+1. Installing Application <br/>
 
-Step 2. Run:  **docker run -p 3000:3000 appname** <br/>
+   Navigate to directory where you want to clone application <br/>
+   
+   Clone repository using url https://github.com/Svajunas900/FastApiApp.git <br/>
+   ````
+   git clone https://github.com/Svajunas900/FastApiApp.git
+   ````
+ 
+ ## Guide for starting this app locally
+   
+Step 1. Use this command 
+````
+fastapi dev main.py
+````
 
+## Guide for starting this app from docker <br/>
+
+Step 1. Run this command in cmd:
+````
+docker build . -t appname
+````
+Step 2. Run:
+````
+docker run -p 3000:3000 appname 
+````
 ## Guide for using this app <br/>
 
 This app has three routes <br/> 
@@ -21,5 +43,3 @@ Valid periods ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 
 Route 3. /values/{stock_name}/{period} <br/>
 Example  /values/msft/1d <br/>
 Returns {"Stock Price": Current_Stock_Price} <br/>
-
-
