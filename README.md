@@ -1,6 +1,6 @@
 ## HOW TO SECTION:
 
-1. Installing Application <br/>
+Installing Application <br/>
 
 Step 1. Navigate to directory where you want to clone application <br/>
    
