@@ -11,14 +11,21 @@
  
  ## Guide for starting this app locally
    
-Step 1. Use this command **fastapi dev main.py**
+Step 1. Use this command 
+````
+fastapi dev main.py
+````
 
 ## Guide for starting this app from docker <br/>
 
-Step 1. Run this command in cmd:  **docker build . -t appname** <br/>
-
-Step 2. Run:  **docker run -p 3000:3000 appname** <br/>
-
+Step 1. Run this command in cmd:
+````
+docker build . -t appname** 
+````
+Step 2. Run:
+````
+docker run -p 3000:3000 appname 
+````
 ## Guide for using this app <br/>
 
 This app has three routes <br/> 
