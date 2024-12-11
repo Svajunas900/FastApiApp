@@ -2,13 +2,18 @@
 
 1. Installing Application <br/>
 
-   Navigate to directory where you want to clone application <br/>
+Step 1. Navigate to directory where you want to clone application <br/>
    
-   Clone repository using url https://github.com/Svajunas900/FastApiApp.git <br/>
-   ````
-   git clone https://github.com/Svajunas900/FastApiApp.git
-   ````
- 
+Step 2. Clone repository using url https://github.com/Svajunas900/FastApiApp.git <br/>
+````
+git clone https://github.com/Svajunas900/FastApiApp.git
+````
+Step 3. Install all the dependencies
+````
+pip install fastapi[standard] yfinance
+````
+
+    
  ## Guide for starting this app locally
    
 Step 1. Use this command 
