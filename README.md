@@ -6,7 +6,7 @@
    
    Clone repository using url https://github.com/Svajunas900/FastApiApp.git <br/>
    ````
-   **git clone https://github.com/Svajunas900/FastApiApp.git** <br/>
+   git clone https://github.com/Svajunas900/FastApiApp.git
    ````
  
  ## Guide for starting this app locally
