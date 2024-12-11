@@ -23,3 +23,10 @@ Example  /values/msft/1d <br/>
 Returns {"Stock Price": Current_Stock_Price} <br/>
 
 
+## HOW TO SECTION:
+
+1. Install Application
+2. Run application locally (examples with commands)
+3. Run from docker (example with command of how to create the docker, start the docker, send request)
+
+
