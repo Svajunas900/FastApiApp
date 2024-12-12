@@ -1,12 +1,16 @@
 import yfinance as yf
 import json
-from fastapi import FastAPI, Depends, FastAPI, Query
-from sqlmodel import Session, create_engine, SQLModel, select
+from fastapi import FastAPI, Depends, FastAPI, Query, Request
+from sqlmodel import Session, SQLModel, select
 from typing import Annotated
 from models import Requests
 from functions import get_stock_info, create_list_from_numpy
 from contextlib import asynccontextmanager
 from DbConnection import SQLDbConnection
+from datetime import datetime
+from ExceptionHandler import ExceptionHandler
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 
 
 @asynccontextmanager
@@ -14,7 +18,9 @@ async def lifespan(app):
     create_db_and_tables()
     yield
 
+
 sql_connection = SQLDbConnection()
+
 
 def get_session():
     with Session(sql_connection) as session:
@@ -29,14 +35,17 @@ app = FastAPI(lifespan=lifespan)
 SessionDep = Annotated[Session, Depends(get_session)]
 
 
-@app.get("/price/{stock_name}")
+@app.get("/prices/{stock_name}")
 def stock_price(stock_name):
-    dat = yf.Ticker(stock_name)
-    current_price = dat.analyst_price_targets["current"]
+    dat = yf.Ticker(stock_name)  
+    try:
+        current_price = dat.analyst_price_targets["current"]
+    except:
+        raise ExceptionHandler.status_code_400()
     return json.dumps({"Stock Price": current_price})
 
 
-@app.get("prices/{stock_name}/{period}")
+@app.get("/prices/{stock_name}/{period}")
 def read_root(stock_name, period):
     numpy_open_prices = get_stock_info(stock_name, period, "Open")
     prices_list = create_list_from_numpy(numpy_open_prices)
@@ -53,9 +62,31 @@ def volumes_and_averages(stock_name, period):
 
 @app.post("/requests")
 def create_request(request: Requests, session: SessionDep):
-    request = Requests(time=request.time, stock=request.stock, price=request.price, av_7=request.av_7, 
-                   av_14=request.av_14, av_21=request.av_21, daily_price=request.daily_price, 
-                   month_price=request.month_price)
+    dat = yf.Ticker(request.stock)
+    try:
+        current_price = dat.analyst_price_targets["current"]
+    except:
+        raise ExceptionHandler.status_code_400()
+    numpy_open_prices = get_stock_info(request.stock, "1mo", "Open")
+    prices_list = create_list_from_numpy(numpy_open_prices)
+    total = 0
+    av_7 = 0
+    av_14 = 0
+    av_21 = 0
+    av_30 = total / len(prices_list)
+    time = datetime.now()
+    for i in range(len(prices_list)):
+        total += prices_list[i]
+        if i == 6:
+            av_7 = total / 7
+        if i == 13:
+            av_14 = total / 14
+        if i == 20:
+            av_21 = total / 20
+
+    request = Requests(time=time, stock=request.stock, price=current_price, av_7=av_7, 
+                   av_14=av_14, av_21=av_21, daily_price=current_price, 
+                   month_price=av_30)
     session.add(request)
     session.commit()
     session.refresh(request)
@@ -67,6 +98,25 @@ def read_request(session: SessionDep, offset: int=0, limit: Annotated[int, Query
     requests = session.exec(select(Requests).offset(offset).limit(limit)).all()
     return requests
 
-@app.get("/check_db_full/{time}")
-def re():
-    return
+
+@app.exception_handler(500)
+async def internal_exception_handler(request: Request, exc: Exception):
+  return JSONResponse(status_code=500, content=jsonable_encoder({"code": 500, "msg": "Server Error"}))
+
+
+# example url http://127.0.0.1:8000/check_db_full/1111999990
+@app.get("/check_db_full/{user_time}")
+def read_request_on_time(user_time, session: SessionDep, offset: int=0, limit: Annotated[int, Query(le=100)] = 100):
+    requests = session.exec(select(Requests).offset(offset).limit(limit)).all()
+    result = []
+    for request in requests:
+        time = datetime.fromtimestamp(int(user_time))
+        if time < request.time:
+            result.append(request)
+    return result
+
+
+@app.get("/")
+def read():
+    stock = yf.Ticker("msft")
+    return stock.analyst_price_targets
