@@ -69,8 +69,8 @@ Returns filtered list of json by time
 Route for creating requests with post method <br/>
 Route. **/requests** <br/>
 Example **/requests** <br/>
-Payload {"stock_name": "{STOCK_NAME}"}
-Example {"stock_name": "msft"}
+Payload {"stock_name": "{STOCK_NAME}"} <br/>
+Example {"stock_name": "msft"} <br/>
 
 
 
