@@ -41,13 +41,14 @@ Returns
 ````
 {"Stock Price": Current_Stock_Price}
 ````
-Valid periods ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max']
+Valid periods ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'] <br/>
 Route 2.  **/prices/{stock_name}/{period}** <br/>
 Example   **/prices/msft/5d** <br/>
+Returns 
 ````
-Returns {"Stock Price": Current_Stock_Prices} <br/>
+{"Stock Price": Current_Stock_Prices} <br/>
 ````
-Valid periods ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max']
+Valid periods ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'] <br/>
 Route 3. **/volumes/{stock_name}/{period}** <br/>
 Example  **/volumes/msft/1d** <br/>
 Returns 
@@ -56,8 +57,9 @@ Returns
 ````
 
 Route 4. **/check_db_full** <br/>
+Returns 
 ````
-Returns {
+{
     "av_7": 12.2,
     "time": "2024-12-11T14:27:02.957791",
     "stock": "msft",
