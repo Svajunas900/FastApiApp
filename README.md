@@ -81,5 +81,6 @@ Example **/requests** <br/>
 Payload {"stock_name": "{STOCK_NAME}"} <br/>
 Example {"stock_name": "msft"} <br/>
 
-Sonal cloud analysis url **https://sonarcloud.io/project/overview?id=Svajunas900_FastApiApp**
-
+Sonal cloud analysis url 
+**https://sonarcloud.io/project/overview?id=Svajunas900_FastApiApp**
+**https://sonarcloud.io/summary/new_code?id=Svajunas900_FastApiApp&branch=main**
