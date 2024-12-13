@@ -111,5 +111,5 @@ Sonal cloud analysis url <br/>
 Confluence <br/>
 FastAPI stock app <br/>
 https://svajunaskoncius.atlassian.net/l/cp/nsHBV8n1 <br/>
-DB Investigation
-https://svajunaskoncius.atlassian.net/l/cp/WzNqcTjL
+DB Investigation <br/>
+https://svajunaskoncius.atlassian.net/l/cp/WzNqcTjL <br/>
