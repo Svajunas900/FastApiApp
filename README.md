@@ -74,7 +74,30 @@ Returns
 Route 5. **/check_db_full/{time}** <br/>
 Example **/check_db_full/1111999990** <br/>
 Returns filtered list of json by time
-
+````
+ {
+    "av_7": 418.478068850157,
+    "time": "2024-12-11T16:56:15.099924",
+    "stock": "msft",
+    "av_21": 445.553685280411,
+    "month_price": 311.837456446706,
+    "id": 14,
+    "price": 445.495,
+    "av_14": 418.53026294244,
+    "daily_price": 445.495
+  },
+  {
+    "av_7": 418.478068850157,
+    "time": "2024-12-11T16:58:08.374751",
+    "stock": "msft",
+    "av_21": 445.553685280411,
+    "month_price": 425.2328951546,
+    "id": 15,
+    "price": 445.705,
+    "av_14": 418.53026294244,
+    "daily_price": 445.705
+  }
+````
 Route for creating requests with post method <br/>
 Route. **/requests** <br/>
 Example **/requests** <br/>
