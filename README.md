@@ -108,8 +108,8 @@ Sonal cloud analysis url <br/>
 **https://sonarcloud.io/project/overview?id=Svajunas900_FastApiApp** <br/>
 **https://sonarcloud.io/summary/new_code?id=Svajunas900_FastApiApp&branch=main** <br/>
 
-Confluence
-FastAPI stock app
-https://svajunaskoncius.atlassian.net/l/cp/nsHBV8n1
+Confluence <br/>
+FastAPI stock app <br/>
+https://svajunaskoncius.atlassian.net/l/cp/nsHBV8n1 <br/>
 DB Investigation
 https://svajunaskoncius.atlassian.net/l/cp/WzNqcTjL
