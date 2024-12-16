@@ -58,10 +58,7 @@ def create_request(request: Requests, session: SessionDep):
         raise ExceptionHandler.status_code_400()
     numpy_open_prices = get_stock_info(request.stock, "1mo", "Open")
     prices_list = create_list_from_numpy(numpy_open_prices)
-    total = 0
-    av_7 = 0
-    av_14 = 0
-    av_21 = 0
+    total, av_7, av_14, av_21 = 0, 0, 0, 0
     av_30 = total / len(prices_list)
     time = datetime.now()
     for i in range(len(prices_list)):
