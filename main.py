@@ -1,6 +1,6 @@
 import yfinance as yf
 import json
-from fastapi import FastAPI, Depends, FastAPI, Query, Request
+from fastapi import Depends, FastAPI, Query, Request
 from sqlmodel import Session, SQLModel, select
 from typing import Annotated
 from models import Requests
@@ -56,7 +56,9 @@ def read_root(stock_name, period):
 def volumes_and_averages(stock_name, period):
     numpy_volumes = get_stock_info(stock_name, period, "Volume")
     volumes_list = create_list_from_numpy(numpy_volumes)
-    average = sum(volumes_list) / len(volumes_list)
+    average = []
+    if volumes_list:
+        average = sum(volumes_list) / len(volumes_list)
     return json.dumps({f"Stock_name-{stock_name}":{"Stock_Volumes":volumes_list , f"Stock_Average_of_{period}":average}})
 
 
