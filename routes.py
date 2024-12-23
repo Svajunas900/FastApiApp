@@ -109,7 +109,7 @@ class Facade:
     
 
 @router.get("/pricesAndVolumes/{stock_name}/{period}", tags=["stocks"])
-def prices_and_volumes(stock_name: str, period: str) -> Facade:
+def prices_and_volumes(stock_name: str, period: str):
     return Facade(stock_name, period)
 
 
