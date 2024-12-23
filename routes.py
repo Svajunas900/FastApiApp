@@ -33,7 +33,7 @@ def stock_price(stock_name: str):
 
 
 @router.get("/prices/{stock_name}/{period}", tags=["stocks"])
-def read_root(stock_name: str, period: str):
+def read_stock_prices(stock_name: str, period: str):
     numpy_open_prices = get_stock_info(stock_name, period, "Open")
     prices_list = create_list_from_numpy(numpy_open_prices)
     return json.dumps({"Stock Prices" : prices_list})
@@ -101,15 +101,13 @@ def read_request_on_time(user_time: str, session: SessionDep, offset: int=0,
 
 class Facade:
     def __init__(self, stock_name, period):
-        self.prices = read_root(stock_name, period)
+        self.prices = read_stock_prices(stock_name, period)
         self.volumes = volumes_and_averages(stock_name, period)
     
     def __str__(self):
         return {self.prices, self.volumes}
-    
+
 
 @router.get("/pricesAndVolumes/{stock_name}/{period}", tags=["stocks"])
 def prices_and_volumes(stock_name: str, period: str):
     return Facade(stock_name, period)
-
-
