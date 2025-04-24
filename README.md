@@ -113,3 +113,18 @@ FastAPI stock app <br/>
 https://svajunaskoncius.atlassian.net/l/cp/nsHBV8n1 <br/>
 DB Investigation <br/>
 https://svajunaskoncius.atlassian.net/l/cp/WzNqcTjL <br/>
+
+## Examples of test cases
+```
+from fastapi.testclient import TestClient
+
+
+def test_stock_prices(client: TestClient):
+    response = client.get("/prices/msft")
+    assert response.status_code == 200
+
+
+def test_read_root(client: TestClient):
+    response = client.get("/prices/msft/5d")
+    assert response.status_code == 200
+```
