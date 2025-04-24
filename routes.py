@@ -15,7 +15,7 @@ sql_connection = SQLDbConnection()
 
 def get_session():
     with Session(sql_connection) as session:
-        yield session 
+        yield session
 
 
 SessionDep = Annotated[Session, Depends(get_session)]
@@ -24,7 +24,7 @@ router = APIRouter()
 
 @router.get("/prices/{stock_name}", tags=["stocks"])
 def stock_price(stock_name: str):
-    dat = yf.Ticker(stock_name)  
+    dat = yf.Ticker(stock_name)
     try:
         current_price = dat.analyst_price_targets["current"]
     except:
@@ -36,7 +36,7 @@ def stock_price(stock_name: str):
 def read_stock_prices(stock_name: str, period: str):
     numpy_open_prices = get_stock_info(stock_name, period, "Open")
     prices_list = create_list_from_numpy(numpy_open_prices)
-    return json.dumps({"Stock Prices" : prices_list})
+    return json.dumps({"Stock Prices": prices_list})
 
 
 @router.get("/volumes/{stock_name}/{period}", tags=["stocks"])
@@ -47,7 +47,7 @@ def volumes_and_averages(stock_name: str, period: str):
     if volumes_list:
         average = sum(volumes_list) / len(volumes_list)
     return json.dumps({f"Stock_name-{stock_name}":
-                       {"Stock_Volumes":volumes_list , f"Stock_Average_of_{period}":average}})
+                       {"Stock_Volumes": volumes_list, f"Stock_Average_of_{period}": average}})
 
 
 @router.post("/requests", tags=["stocks"])
@@ -71,9 +71,9 @@ def create_request(request: Requests, session: SessionDep):
         if i == 20:
             av_21 = total / 20
 
-    request = Requests(time=time, stock=request.stock, price=current_price, av_7=av_7, 
-                   av_14=av_14, av_21=av_21, daily_price=current_price, 
-                   month_price=av_30)
+    request = Requests(time=time, stock=request.stock, price=current_price, av_7=av_7,
+                       av_14=av_14, av_21=av_21, daily_price=current_price,
+                       month_price=av_30)
     session.add(request)
     session.commit()
     session.refresh(request)
@@ -81,14 +81,14 @@ def create_request(request: Requests, session: SessionDep):
 
 
 @router.get("/check_db_full", tags=["stocks"])
-def read_request(session: SessionDep, offset: int=0, limit: Annotated[int, Query(le=100)] = 100,):
+def read_request(session: SessionDep, offset: int = 0, limit: Annotated[int, Query(le=100)] = 100,):
     requests = session.exec(select(Requests).offset(offset).limit(limit)).all()
     return requests
 
 
 # example url http://127.0.0.1:8000/check_db_full/1111999990
 @router.get("/check_db_full/{user_time}", tags=["stocks"])
-def read_request_on_time(user_time: str, session: SessionDep, offset: int=0, 
+def read_request_on_time(user_time: str, session: SessionDep, offset: int = 0,
                          limit: Annotated[int, Query(le=100)] = 100):
     requests = session.exec(select(Requests).offset(offset).limit(limit)).all()
     result = []
@@ -103,9 +103,9 @@ class Facade:
     def __init__(self, stock_name, period):
         self.prices = read_stock_prices(stock_name, period)
         self.volumes = volumes_and_averages(stock_name, period)
-    
+
     def __str__(self):
-        return {self.prices, self.volumes}
+        return f"{self.prices, self.volumes}"
 
 
 @router.get("/pricesAndVolumes/{stock_name}/{period}", tags=["stocks"])
